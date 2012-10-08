@@ -1,0 +1,492 @@
+/*
+   Home Page for CS230
+   Author: Cas Gentry
+   Date:   22 Aug 10
+
+   Filename:         index.html
+*/
+
+html{
+background: #4E9258 url('vegetables.jpg') no-repeat 50% 50%;
+}
+
+html, body {
+	height:100%; 
+	margin:0; 
+	padding:0;
+}
+
+p {
+	font-family: arial, sans-serif; 
+	font-size: 12pt;
+}
+
+#title h1	{
+	color: #347235;
+	font-size: 40px; 
+	margin: 30px 0px 30px 10px; 
+	font-family: fantasy, sans serif; 
+	text-shadow: grey 5px 5px 10px;
+}
+
+table tr td{
+	align: center;
+	vertical-align: top;
+}
+
+a img {
+	border-color: white;
+	text-decoration: none;
+}
+
+/*main id attributes*/
+#main {
+	background-color: white;
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 12.5%;
+	height: 100%;
+	width: 75%;
+	overflow: auto;
+}
+
+/*title id attributes*/
+#title {
+	margin: 0px 0px 10px 0px;
+	display: block;
+	text-align: center;
+	height: 20pt;
+}
+
+/* Blurb formatting */
+#blurb {
+	display: block;
+	position: absolute;
+	top: 0%;
+	left: 280px;
+	margin-right: 5%;
+}
+
+#blurb p{
+	font-family: arial, sans-serif;
+	line-height: 30px;
+	text-align: justify;
+}		
+
+#blurb p:first-letter{
+	font-size: 20pt;
+	color: #4AA02C;
+	vertical-align: bottom;
+	margin-left: 20px;
+}
+
+#content{
+	display: block;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	width: 75%;
+	height: 65%;
+}
+
+/* Addresses all the login formatting */
+#login {
+	display: block;
+	position: absolute;
+	top: 25%;
+	right: 2%;
+	padding: 5px;
+	width: 145px;
+	margin: 0px;
+}
+
+#login form table{
+	font-family: sans-serif, arial;
+	font-size: 11pt;
+	padding: 5px;
+}
+
+#login .logInput{
+	margin: 0px 0px 10px 0px;
+	width: 135px;
+}
+
+#login .tableTag {
+	font-weight: bold;
+	color: #254117;
+}
+
+#login .logButton{
+	display: block;
+	float: right;
+	margin-top: 10px;
+	width: 60px;
+}
+
+#login .signup{
+	width: 135px;
+	margin-top: 0px;
+	color: red;
+}
+
+.errorMsg {
+	color: gray;
+	font-size: 9pt;
+	font-style: italic;
+	text-align: right;
+	margin-top: 0px;
+}
+
+/*Fridge Search attributes*/
+#fridge {
+	display: block;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	height: 105%;
+	background: url(fridge.jpg) no-repeat top left;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Search ingredients function */
+#searchForm {
+	margin: 30px 3px 0px 70px;
+	width: 170px;
+	height: 275px;
+}
+
+#searchForm .ingred{
+	margin: 3px 0px 3px 16px;
+	border: 1px solid grey;
+	width: 110px;
+}
+
+#searchForm p { 
+	font-size: 9pt; 
+	margin-bottom: 35px; 
+	margin-right: 5px;
+}
+
+#searchForm .button {
+	display: block;
+	float: right;
+	margin: 15px 15px 0px 0px;
+	width: 65px;
+}
+
+/* Attributes for Registration page*/
+#whyJoin {
+	display: block;
+	position: absolute;
+	top: 150px;
+	left: 6%;
+	width: 37.5%;
+	
+}
+
+#whyJoin .regTop{ 
+	color: white;
+	display: block;
+	border: solid #41A317; 
+	vertical-align: middle;
+	background: #336633 url(ingred.jpg) center bottom;
+	text-shadow: black 2px 3px 2px;
+	text-align: center; 
+	padding: 10px;
+	font-weight: bolder;
+}
+
+#whyJoin .regBot { 
+	border: solid #C3FDB8; 
+	height: 120px;
+}
+
+#whyJoin .regBot ul { margin-left: 20px; }
+
+#whyJoin .regBot ul li {
+	list-style-type: square;
+	padding: 3px;
+}
+
+#regForm{
+	display: block;
+	position: absolute;
+	top: 150px;
+	right: 6%;
+	width: 37.5%;
+}
+
+#regForm h3{ 
+	border-bottom: solid #C3FDB8; 
+}
+
+#regForm tr td{ 
+	vertical-align: top;
+}
+
+#regForm input{
+	height: 25px;
+	width: 175px;
+}
+
+#regForm .button input{
+	margin: 10px;
+	padding: 5px;
+	width: 65px;
+	height: 30px;
+	float: right;
+	border: 1px solid black;
+}
+
+
+
+/* After login menu */
+#welcome{
+	display: block;
+	position: absolute;
+	top: 5%;
+	right: 0%;
+	width: 20%;
+	font-family: sans-serif, arial;
+	font-size: 10pt;
+}
+
+#userMenu {
+	display: block;
+	position: absolute;
+	top: 25%;
+	right: 0%;
+	font-size: 12pt;
+	width: 20%;
+}
+
+#userMenu tr td{
+	text-align: left;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#userMenu a:link, #userMenu a:visited { 
+	color: black;
+	text-decoration: none; 
+}
+
+#userMenu a:hover { 
+	background-color: #C3FDB8;
+}
+
+/* Bottom page links */
+#lowerLinks {
+	display: block;
+	position: absolute;
+	bottom: 0%;
+	left: 12.5%;
+	width: 75%;
+}
+
+#lowerLinks table{
+	background-color: white;
+	width: 100%;
+	height: 25px;
+}
+
+#lowerLinks table tr td{
+	text-align: center;
+	vertical-align: middle;
+	width: 20%;
+}
+
+#lowerLinks a:link, #lowerLinks a:visited {
+	color: black;
+	text-decoration: none;
+	font-size: 9pt;
+}
+
+#lowerLinks table tr td:hover{
+	background-color: #66CC33;
+	font-size: 8pt;
+}
+
+.leftRecipe {
+	align: right;
+	font-weight: bold;
+	font-size: 9pt;
+	margin: 0px;
+}
+
+#measurement{
+	font-size: 8pt;
+	margin: 5px;
+}
+
+#picFont{
+	text-align: left;
+	font-size: 8pt;
+	width: 90%;
+}
+
+#picFont .special{
+	color: red;
+}
+
+#addRecipeForm{
+	display: block;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	height: 65%;
+	width: 90%;
+}
+
+#addRecipeForm .leftRecipe{
+	padding: 0px 25px 5px 0px;
+	font-weight: bold;
+	text-align: right;
+}
+
+
+#title h2{
+	color: #254117; 
+	font-size: 15px; 
+	margin: -30px; 
+	font-family: sans-serif, arial;
+}
+
+.ingred {
+	margin: 3px;	
+}
+
+#showRecipe{
+	display: block;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	width: 70%;
+}
+
+#showAccount{
+	display: block;
+	position: absolute;
+	top: 35%;
+	left: 25%;
+	width: 65%;
+}
+
+#showAccount table tr td{
+	padding: 10px;
+}
+
+#displayRecipe{
+	display: block;
+	position: absolute;
+	top: 30%;
+	left: 10%;
+	width: 65%;
+	font-family:sans-serif, arial;
+}
+
+#displayRecipe tr td{
+	padding: 10px;
+}
+
+#displayTitle{
+	text-align: left;
+	font-size: 25pt;
+	color: #254117;
+	font-family: sans-serif, arial;
+}
+
+#author{
+	font-size: 10pt;
+	font-family: sans-serif, arial;
+	margin: 0px 0px 0px 50px;
+	padding: 0px;
+}
+
+.topRow{
+	text-align: left;
+	font-size: 9pt;
+	width: 25%;
+}
+
+#summary{
+	text-align: center;
+	font-size: 10pt;
+	font-style: italic;
+	padding: 0px 10px 0px 5px;
+}
+
+.ingreds{
+	font-size: 9pt;
+	padding: 0px;
+	margin: 0px 0px 2px 5px;
+	list-style-type: none;
+}
+
+.steps{
+	font-size: 11pt;
+	line-height: 20px;
+	text-indent: 25px;
+	word-spacing: 5px;
+}
+
+.steps ol, ul{
+	padding: 0px;
+	margin: 0px;
+}
+
+.steps li{
+	text-indent: 0px;
+	margin-bottom: 10px;
+}
+
+#rate{
+	width: 12px;
+}
+
+#rate a:link{
+	text-decoration: none;
+}
+
+#viewTitle{
+	display: block;
+	float: left;
+	margin: 0px 0px 0px 10px;
+}
+#viewTitle a{
+	text-decoration: none;
+	color: #339900;
+}
+
+#viewTitle a:hover{
+	font-style: italic;
+}
+
+#viewRate{
+	display: block;
+	float: left;
+	margin: 2px 10px 0px 0px;
+}
+
+#shortDesc{
+	display: block;
+	margin: 0px 0px 0px 10px;
+	font-style: italic;
+}
+
+#viewImage{
+	margin: 10px 5px 0px 0px;
+}
+
+#homeLink{
+	display: block;
+	position: absolute;
+	top: 2%;
+	left: 5%;
+}
+
+#homeLink a{
+	text-decoration: none;
+}
