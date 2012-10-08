@@ -52,7 +52,7 @@
 
 <html>
 <head>
-<script language="JavaScript" type="text/javascript" src="richtext.js"></script>
+<script type="text/javascript" src="richtext.js"></script>
 
 <script type="text/javascript">
 // width to resize large images to
@@ -120,7 +120,7 @@ function applyChanges(){
 	<div id="homeLink"><a href="index.php"><img src="fridge.jpg" height="100px"/></a></div>
 	<div id="addRecipe">
 		<table id="addRecipeForm" width="100%"><form enctype="multipart/form-data" action="addrecipes.php?upload=yes" method="POST" onsubmit="return submitForm();">
-		<script language="JavaScript" type="text/javascript">
+		<script type="text/javascript">
 		
 			function submitForm() {
 				//make sure hidden and iframe values are in sync for all rtes before submitting form
@@ -191,7 +191,7 @@ function applyChanges(){
 			
 			<tr><td class="leftRecipe">Directions:</td>
 				<td colspan="2">
-				<script language="JavaScript" type="text/javascript">
+				<script type="text/javascript">
 					//Usage: writeRichText(fieldname, html, width, height, buttons, readOnly)
 					writeRichText('cookSteps', '<ol><li></li></ol>', 400, 200, true, false);
 				</script>

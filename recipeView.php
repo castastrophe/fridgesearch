@@ -156,6 +156,7 @@
 		include("userMenu.php");
 	?>
 </div>
+</div>
 
 <?php include("lowerLinks.php"); ?>
 

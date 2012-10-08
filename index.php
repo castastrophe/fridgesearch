@@ -35,11 +35,7 @@
    Supporting files: format.css, error.js, openDB.php, userMenu.php, dbLogin.php, funcioncall.php
 -->
 
-<link href="format.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="error.js"> </script>
-<title>Recipe Organization Tool</title>
-
-</head>
+<?php include("head.html")?>
 
 <body>
 <div id="main">
@@ -75,9 +71,8 @@
 		
 	</div>
 
+	<?php include("lowerLinks.php"); ?>
 </div>
-
-<?php include("lowerLinks.php"); ?>
 
 </body>
 </html>

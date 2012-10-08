@@ -5,11 +5,11 @@ function check_login($usr, $pass){
 	unset($_SESSION['unregistered']);
 	
 	if(empty($usr)){
-		$this->HandleError("User name is empty."); 
+		$_SESSION['err'] = "User name is empty."; 
 		return false;
 	}
 	elseif(empty($pass)){
-		$this->HandleError("Password is empty."); 
+		$_SESSION['err'] = "Password is empty."; 
 		return false;
 	}
 	else{

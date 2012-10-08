@@ -7,7 +7,8 @@
 */
 
 html{
-background: #4E9258 url('vegetables.jpg') no-repeat 50% 50%;
+	background: #4E9258 url('images/vegetables.jpg') no-repeat 50% 50%;
+	overflow: none;
 }
 
 html, body {
@@ -39,16 +40,22 @@ a img {
 	text-decoration: none;
 }
 
+input{
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+}
+
 /*main id attributes*/
 #main {
 	background-color: white;
 	display: block;
 	position: absolute;
-	top: 0px;
+	top: 1%;
 	left: 12.5%;
-	height: 100%;
+	height: 98%;
 	width: 75%;
-	overflow: auto;
+	overflow: none;
+	border-radius: 25px;
+	box-shadow: 5px 3px 2px 2px rgba(0,0,0,0.2);
 }
 
 /*title id attributes*/
@@ -110,6 +117,7 @@ a img {
 #login .logInput{
 	margin: 0px 0px 10px 0px;
 	width: 135px;
+	border-radius: 5px;
 }
 
 #login .tableTag {
@@ -145,7 +153,7 @@ a img {
 	top: 0%;
 	left: 0%;
 	height: 105%;
-	background: url(fridge.jpg) no-repeat top left;
+	background: url(images/fridge.jpg) no-repeat top left;
 	margin: 0px;
 	padding: 0px;
 }
@@ -161,6 +169,7 @@ a img {
 	margin: 3px 0px 3px 16px;
 	border: 1px solid grey;
 	width: 110px;
+	border-radius: 5px;
 }
 
 #searchForm p { 
@@ -191,7 +200,7 @@ a img {
 	display: block;
 	border: solid #41A317; 
 	vertical-align: middle;
-	background: #336633 url(ingred.jpg) center bottom;
+	background: #336633 url(images/ingred.jpg) center bottom;
 	text-shadow: black 2px 3px 2px;
 	text-align: center; 
 	padding: 10px;
@@ -281,13 +290,13 @@ a img {
 #lowerLinks {
 	display: block;
 	position: absolute;
-	bottom: 0%;
+	bottom: 2%;
 	left: 12.5%;
 	width: 75%;
 }
 
 #lowerLinks table{
-	background-color: white;
+	/* background-color: white; */
 	width: 100%;
 	height: 25px;
 }
@@ -302,11 +311,15 @@ a img {
 	color: black;
 	text-decoration: none;
 	font-size: 9pt;
+	padding: 10px;
+	border-radius: 15px;
 }
 
-#lowerLinks table tr td:hover{
-	background-color: #66CC33;
-	font-size: 8pt;
+#lowerLinks a:hover{
+	background-color: #C0C0C0;
+	padding: 10px;
+	border-radius: 15px;
+	font-size: 9pt;
 }
 
 .leftRecipe {
