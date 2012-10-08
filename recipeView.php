@@ -1,11 +1,13 @@
 <?php
 	session_start();
-	if($_SESSION['login']!="yes"){
+	if($_SESSION['login']!="true"){
 		header("Location: index.php");
 	}
 	
 	if(@$_GET['rating'] != null){
-		include("openDB.php");
+		// include pages with connection details, DRY approach
+		include("credentials.php");
+		include("dbLogin.php");
 		
 		//Recipe ID should be found in the url
 		$recipeID = $_GET['recipeID'];
