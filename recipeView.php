@@ -74,7 +74,8 @@
 	
 	<div id="displayRecipe">
 		<?php
-			include("openDB.php");
+			include("credentials.php");
+			include("dbLogin.php");
 			
 			//Recipe ID should be found in the url
 			$recipeID = $_GET['recipeID'];
@@ -124,7 +125,7 @@
 			
 			//Display recipe ratings
 			echo "<td class=\"topRow\">";
-			include("rating.php");
+			ratings($recipeID, $row[2]);
 			echo "</td></tr>";
 			
 			echo "<tr><td colspan=\"3\" id=\"summary\">\"".$row[3]."\"</td></tr>";
@@ -158,7 +159,4 @@
 </div>
 </div>
 
-<?php include("lowerLinks.php"); ?>
-
-</body>
-</html>
+<?php include("bottom.php"); ?>

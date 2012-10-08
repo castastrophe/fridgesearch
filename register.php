@@ -175,10 +175,5 @@
 		}
 		?>
 	</div>
-
 </div>
-
-<?php include("lowerLinks.php"); ?>
-
-</body>
-</html>
+<?php include("bottom.php"); ?>

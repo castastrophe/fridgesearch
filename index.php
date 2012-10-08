@@ -71,10 +71,6 @@
 		
 		
 	</div>
-
-	<?php include("lowerLinks.php"); ?>
 </div>
 
-</body>
-</html>
-<?php ob_end_flush(); ?>
+<?php include("bottom.php"); ?>

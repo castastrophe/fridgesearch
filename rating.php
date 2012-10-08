@@ -1,4 +1,6 @@
 <?php
+
+function ratings(){
 	//if the user has not yet rated this recipe
 	$query = stripSlashes("SELECT COUNT(numStars) FROM Ratings WHERE recipeID='".$recipeID."' AND userID='".$row[2]."'");
 	$result = mysql_query($query);
@@ -34,6 +36,6 @@
 			}
 			echo "\" name=\"star".$s."\" id=\"rate\"/></a> ";
 		}		
-
 	}
+}
 ?>

@@ -1,21 +1,23 @@
 <?php
 	session_start();
-	if($_SESSION['login']!="true"){
-		header("Location: index.php");
-	}
+	include("functioncall.php");
+	
+	//check if the user is logged in
+	login_status();
+	connect_db();
 
 	if(@$_GET['upload']=="yes") {
-   		include("credentials.php");
-   		include("dbLogin.php");
-
-		$title 	= $_POST[recipeTitle];
-		$blurb = $_POST[blurb];		
-	   	$serve	= $_POST[serveSize];
-	   	$time	= $_POST[cookTime];
-	   	$steps = $_POST[cookSteps];
+		//get inputted recipe details
+		$title 	= trim($_POST[recipeTitle]);
+		$blurb = trim($_POST[blurb]);		
+	   	$serve	= trim($_POST[serveSize]);
+	   	$time	= trim($_POST[cookTime]);
+	   	$steps = trim($_POST[cookSteps]);
 		
+	   	//get the user's id from session vars
 		$usrID = $_SESSION['username'];
    		
+		//determine the next recipeID
    		$query = stripSlashes("SELECT MAX(recipeID) FROM Recipe");
 		$result=mysql_query($query);
 		$row = mysql_fetch_row($result);
@@ -97,6 +99,19 @@ function applyChanges(){
   field.width=x;
   field.height=y;
 }
+
+function submitForm() {
+	//make sure hidden and iframe values are in sync for all rtes before submitting form
+	updateRTEs();
+	
+	//change the following line to true to submit form
+	alert("rte1 = " + htmlDecode(document.RTEDemo.rte1.value));
+	return false;
+}
+
+//Usage: initRTE(imagesPath, includesPath, cssFile)
+initRTE("images/", "", "");
+
 </script>
 
 <!-- 
@@ -118,25 +133,13 @@ function applyChanges(){
 		<h1>What's in your 'fridge?</h1>
 		<h2>Add Your Own Recipe*</h2>
 	</div>
+	
 	<div id="homeLink"><a href="index.php"><img src="images/fridge.jpg" height="100px"/></a></div>
+	
 	<div id="addRecipe">
-		<table id="addRecipeForm">
 		<form enctype="multipart/form-data" action="addrecipes.php?upload=yes" method="POST" onsubmit="return submitForm();">
-		<script type="text/javascript">
 		
-			function submitForm() {
-				//make sure hidden and iframe values are in sync for all rtes before submitting form
-				updateRTEs();
-				
-				//change the following line to true to submit form
-				alert("rte1 = " + htmlDecode(document.RTEDemo.rte1.value));
-				return false;
-			}
-
-			//Usage: initRTE(imagesPath, includesPath, cssFile)
-			initRTE("images/", "", "");
-		</script>
-		
+		<table id="addRecipeForm">		
 		<tr>
 			<td class="leftRecipe" width="10%">Title:</td>
 			<td width="40%"><input type="text" name="recipeTitle" style="width: 100%"/></td>
@@ -217,11 +220,9 @@ function applyChanges(){
 					<input type="submit" style="width: 100px"/>
 				</td>
 			</tr>
-		</form></table>
+		</table>
+		</form>
 	</div>
-
 </div>
 
-<?php include("lowerLinks.php"); ?>
-</body>
-</html>
+<?php include("bottom.php"); ?>

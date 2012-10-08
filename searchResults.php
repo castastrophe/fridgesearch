@@ -1,13 +1,11 @@
 <html>
 <head>
 <?php
-	session_start();
+	include("functioncall.php");
 	
-	// include pages with connection details, DRY approach
-	include("credentials.php");
-	include("dbLogin.php");
+	connect_db();
   	
-  	$ingredients = $_POST['ingreds'];
+  	$ingredients = trim($_POST['ingreds']);
   	$userPick = array();
 
 	//Build an array to hold the search terms userPick
@@ -19,23 +17,9 @@
 	}
 
 	//runs the function mergeArray() on every element of $ingredients
-	array_walk($ingredients, "mergeArray"); 
-	
-	//don't query the database if no search terms were entered
-	if(!empty($ingredients)){
-		//search database for items in userPick array and assign values for best match
-		$query = "SELECT DISTINCT recipeID, COUNT(*) AS counter FROM Ingredients WHERE ";
-
-		for($x=0; $x<(sizeof($userPick)-1); $x++){
-			$query=$query."LOWER(name) LIKE LOWER('%".$userPick[$x]."%') OR ";
-		}
-	
-		$query=$query."LOWER(name) LIKE LOWER('%".$userPick[$x]."%')";
-		$query=$query."GROUP BY recipeID ORDER BY counter DESC";
-		$query=stripSlashes($query);
-
-		$bestMatch= mysql_query($query);
-	}
+	if($ingredients){
+		array_walk($ingredients, "mergeArray");
+	} 
 ?>
 <!-- 
    Author: Cas Gentry
@@ -55,17 +39,19 @@
 		if(@$_SESSION['login'] == "true"){
 			include("userMenu.php");
 		}
-
-		echo "<div id=\"title\"> <h1>What's in your 'fridge?</h1> </div>";
-
-		echo "<div id=\"content\">";
-		echo "<table>";
-		echo "<tr><td>";
+	?>
+	
+	<div id="title"><h1>What's in your 'fridge?</h1></div>
+	<div id="content">
+	<table>
+		<tr>
+			<td>
+	<?php
 		if(empty($ingredients)){
-			echo "No search terms were entered.";
+			echo "<p>No search terms were entered.</p>";
 		}
 		else{
-			echo "Recipes which include ";
+			echo "<p>Recipes which include ";
 			if(sizeof($userPick)>1){
 				for($a=0; $a<(sizeof($userPick)-1); $a++){
 					echo $userPick[$a].", ";
@@ -76,21 +62,42 @@
 				echo $userPick[0].".";
 			}
 		
-		echo "</td></tr>";
-		
+			echo "</p>";
+		}
+	?>
+			</td>
+		</tr>
+	
+	<?php
+		//don't query the database if no search terms were entered
 		if(!empty($ingredients)){
-			echo "<tr><td>";
+			echo "\t\t<tr>\n\t\t\t<td>";
 			
-			for($l=0; $l<mysql_num_rows($bestMatch); $l++){
+			//search database for items in userPick array and assign values for best match
+			$query = "SELECT DISTINCT recipeID, COUNT(*) AS counter FROM Ingredients WHERE ";
+			
+			for($x=0; $x<(sizeof($userPick)-1); $x++){
+				$query=$query."LOWER(name) LIKE LOWER('%".$userPick[$x]."%') OR ";
+			}
+			
+			$query=$query."LOWER(name) LIKE LOWER('%".$userPick[$x]."%')";
+			$query=$query."GROUP BY recipeID ORDER BY counter DESC";
+			$query=stripSlashes($query);
+
+			$bestMatch= mysql_query($query);
+			
+			//print out the best matches
+			for($l=0; $l < mysql_num_rows($bestMatch); $l++){
 				$level = mysql_fetch_row($bestMatch);
-				for($m=0; $m<mysql_num_fields($bestMatch); $m=$m+2){
+				for($m=0; $m < mysql_num_fields($bestMatch); $m=$m+2){
 					$getRecipeInfo = mysql_query("SELECT title, image, summary FROM Recipe WHERE recipeID=$level[$m]");
 			
 					for($c=0; $c<mysql_num_rows($getRecipeInfo); $c++){
 						$row=mysql_fetch_row($getRecipeInfo);
 						echo"<table><tr>";
-						echo "<td rowspan=\"2\"><img src=\"recipePics/".$row[1]."\" width=\"125\" id=\"viewImage\"/></td>";
-						echo "<td><div id=\"viewTitle\"><h2><a href=\"http://lion.arvixe.com/~kosterb/gentryca/Project/recipeView.php?recipeID=".$level[$m]."\">".$row[0]."</a></h2></div> ";
+						echo "<td rowspan=\"2\"><img src=\"images/recipePics/".$row[1]."\" width=\"125\" id=\"viewImage\"/></td>";
+						echo "<td><div id=\"viewTitle\"><h2><a href=\"casgentry.com/recipe/recipeView.php?recipeID=".$level[$m]."\">".$row[0]."</a></h2></div> ";
+						
 						//ratings
 						$getRating = mysql_query("SELECT numStars FROM Ratings WHERE recipeID=$level[$m]");
 						$total = 0;
@@ -100,6 +107,7 @@
 								$total = $total + $stars[$e];
 							}
 						}
+						
 						$average = $total/sizeof($stars);
 					
 						echo " <div id=\"viewRate\"> ";
@@ -112,7 +120,8 @@
 							}
 						}
 					
-						echo "</div></td></tr>";
+						echo "</div>";
+						echo "</td></tr>";
 						echo "<tr><td colspan=\"2\"><div id=\"shortDesc\">".$row[2]."</div><BR><BR></td>";
 						echo "</tr></table>";
 					}
@@ -121,14 +130,9 @@
 					
 			echo "</td></tr>";
 		}
-
-		echo "</table>";
-		echo "</div>";
 	?>
-
+		</table>
+	</div>
 </div>
 
-<?php include("lowerLinks.php"); ?>
-
-</body>
-</html>
+<?php include("bottom.php"); ?>
