@@ -50,7 +50,8 @@
 	<div id="content">
 		<div id="fridge">
 			<div id="searchForm">
-			<form style="margin-left: 25px" action="searchResults.php" method="POST">
+			<!-- <form style="margin-left: 25px" action="searchResults.php" method="POST"> -->
+			<form style="margin-left: 25px" action="" method="POST">
 				<p>What ingredients would you like to cook with?</p>
 				<?php
 					for($a=0; $a<5; $a++){

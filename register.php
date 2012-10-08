@@ -1,6 +1,7 @@
 <?php
 	session_start();
-	include("openDB.php");
+	include("credentials.php");
+	include("dbLogin.php");
 	
 	/* After putting in your info, this puts your data into the Registration db */
 	if(@$_GET['register']=="submit"){
@@ -39,7 +40,7 @@
 	   			unset($_SESSION['check']);
 	   			/* E-mail the confirmation to the customer */
 	  		 	$subject = "What's in Your Fridge - Confirmation E-mail";
- 				$body = "Go to http://lion.arvixe.com/~kosterb/gentryca/Project/register.php?step=validate&email=".$email." to confirm your membership with What's in Your Fridge.";
+ 				$body = "Go to casgentry.com/register.php?step=validate&email=".$email." to confirm your membership with What's in Your Fridge.";
  				if (mail($email, $subject, $body)) {
    					header("Location: register.php?step=confirm");
   				} 

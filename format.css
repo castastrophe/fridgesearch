@@ -42,6 +42,7 @@ a img {
 
 input{
 	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
+	border-radius: 10px;
 }
 
 /*main id attributes*/
@@ -192,7 +193,6 @@ input{
 	top: 150px;
 	left: 6%;
 	width: 37.5%;
-	
 }
 
 #whyJoin .regTop{ 
@@ -205,10 +205,13 @@ input{
 	text-align: center; 
 	padding: 10px;
 	font-weight: bolder;
+	border-radius: 15px;
 }
 
 #whyJoin .regBot { 
-	border: solid #C3FDB8; 
+	/* border: solid #C3FDB8;  */
+	padding-top: 10px;
+	padding-left: 20px;
 	height: 120px;
 }
 
