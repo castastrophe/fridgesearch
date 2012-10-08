@@ -1,7 +1,7 @@
 <?php
 	if ( @$_SESSION['login'] != "true" ){
 		echo "<div id=\"login\">";
-		echo "<form action=\"index.php?dologin=yes\" method=\"POST\">";
+		echo "<form action=\"index.php?dologin=true\" method=\"POST\">";
 		echo "<table><tr>";
 		echo "<td class=\"tableTag\">E-mail</td></tr>";
 		echo "<tr><td><input type=\"text\" name=\"username\" class=\"logInput\" maxlength=\"50\"/></td></tr>";

@@ -1,25 +1,19 @@
 <?php
-	session_start();
-	if($_SESSION['login']!="true"){
-		header("Location: index.php");
-	}
+/*
+ * Page: cookbook.php
+ * Desc: Recipe search, view your recipes
+ * Author: Cas Gentry
+ * Date Updated: 7 Oct 12
+*/
+
+	include("top.php");
+	
+	login_status();
 ?>
-
 <html>
-<head>
 
-<!-- 
-   Home Page for CS230
-   Author: Cas Gentry
-   Date:   12 Oct 10
+<?php include("head.html"); ?>
 
-   Filename:         home.html
-   Supporting files: format.css
--->
-<link href="format.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="error.js"> </script>
-<title>Database Project</title>
-</head>
 <body>
 <div id="main">
 
@@ -30,17 +24,14 @@
 		<div id="homeLink"><a href="index.php"><img src="fridge.jpg" height="100px"/></a></div>
 		
 	<?php
-		include("credentials.php");
-		include("dbLogin.php");
-		
 		$usrID = $_SESSION['username'];
    		
    		$query = stripSlashes("SELECT recipeID FROM Recipe WHERE userID='$usrID'");
 		$result=mysql_query($query);
-		
-		echo "<div id=\"showRecipe\">";
-		echo "<table width=\"100%\">";
-		
+	?>
+		<div id="showRecipe">
+			<table>
+	<?php
 		if($result){
 			for($l=0; $l<mysql_num_rows($result); $l++){
 			$level = mysql_fetch_row($result);
@@ -84,11 +75,12 @@
 		else{
 			echo "<tr><td>No recipes have yet been entered.</td></tr>";
 		}
-
-		echo "</table></div>";
-
-		include("userMenu.php");
 	?>
+		</table>
+	</div>
+
+	<?php include("userMenu.php"); ?>
+	
 </div>
 
 <?php include("bottom.php"); ?>

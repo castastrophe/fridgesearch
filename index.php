@@ -6,36 +6,15 @@
  * Date Updated: 7 Oct 12
 */
 
-	// allow output buffering
-	ob_start('ob_gzhandler');
-
+	include("top.php");
+	
 	// start a new session
 	session_start();
-    
-    // include pages with connection details, DRY approach
-  	include("credentials.php");
-	include("dbLogin.php");
-	
-	//pull in stored functions
-	include("functioncall.php");
-	
-	if(check_login($_POST['username'], $_POST['pwd'])){ $_SESSION['login'] = "true"; }
-  	elseif(@$_GET['dologin'] == "no" ){ $_SESSION['login']="false"; }
 ?>
 
 <html>
-<head>
 
-<!-- 
-   Home Page for Recipe Organizing Tool
-   Author: Cas Gentry
-   Date:   12 Oct 10
-
-   Filename:         index.php
-   Supporting files: format.css, error.js, openDB.php, userMenu.php, dbLogin.php, funcioncall.php
--->
-
-<?php include("head.html")?>
+<?php include("head.html"); ?>
 
 <body>
 <div id="main">

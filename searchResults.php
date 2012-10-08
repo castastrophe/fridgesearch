@@ -1,9 +1,14 @@
-<html>
-<head>
 <?php
-	include("functioncall.php");
+/*
+ * Page: searchResults.php
+ * Desc: Recipe search, view search
+ * Author: Cas Gentry
+ * Date Updated: 7 Oct 12
+*/
+
+	include("top.php");
 	
-	connect_db();
+	login_status();
   	
   	$ingredients = trim($_POST['ingreds']);
   	$userPick = array();
@@ -21,19 +26,11 @@
 		array_walk($ingredients, "mergeArray");
 	} 
 ?>
-<!-- 
-   Author: Cas Gentry
-   Date:   12 Oct 10
-
-   Filename:         searchResults.php
-   Supporting files: format.css, error.js, dbLogin.php, credentials.php, 
-   					 userMenu.php, lowerLinks.php
--->
+<html>
 
 <?php include("head.html")?>
 
 <body>
-
 <div id="main">
 	<?php
 		if(@$_SESSION['login'] == "true"){

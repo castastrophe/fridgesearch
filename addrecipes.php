@@ -1,10 +1,15 @@
 <?php
-	session_start();
-	include("functioncall.php");
+/*
+ * Page: addrecipes.php
+ * Desc: Recipe search, add new recipes
+ * Author: Cas Gentry
+ * Date Updated: 7 Oct 12
+*/
+
+	include("top.php");
 	
 	//check if the user is logged in
 	login_status();
-	connect_db();
 
 	if(@$_GET['upload']=="yes") {
 		//get inputted recipe details
@@ -54,9 +59,10 @@
 ?>
 
 <html>
-<head>
-<script type="text/javascript" src="richtext.js"></script>
 
+<?php include("head.html"); ?>
+
+<body>
 <script type="text/javascript">
 // width to resize large images to
 var maxWidth=250;
@@ -114,19 +120,6 @@ initRTE("images/", "", "");
 
 </script>
 
-<!-- 
-   Home Page for CS230
-   Author: Cas Gentry
-   Date:   12 Oct 10
-
-   Filename:         home.html
-   Supporting files: format.css
--->
-<link href="format.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="error.js"> </script>
-<title>Database Project</title>
-</head>
-<body>
 <div id="main">
 	
 	<div id="title">
@@ -223,6 +216,9 @@ initRTE("images/", "", "");
 		</table>
 		</form>
 	</div>
+	
+	<?php include("userMenu.php"); ?>
+	
 </div>
 
 <?php include("bottom.php"); ?>

@@ -1,36 +1,29 @@
 <?php
-	session_start();
-	if($_SESSION['login']!="yes"){
-		header("Location: index.php");
-	}
+/*
+ * Page: account.php
+ * Desc: Recipe search, account view
+ * Author: Cas Gentry
+ * Date Updated: 7 Oct 12
+*/
+
+	include("top.php");
+	
+	login_status();
 ?>
-
 <html>
-<head>
 
-<!-- 
-   Home Page for CS230
-   Author: Cas Gentry
-   Date:   12 Oct 10
+<?php include("head.html"); ?>
 
-   Filename:         home.html
-   Supporting files: format.css
--->
-<link href="format.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="error.js"> </script>
-<title>Database Project</title>
-</head>
 <body>
 <div id="main">
 
-<div id="title">
-	<h1>What's in your 'fridge?</h1>
-	<h2>Account Information</h2>
-</div>
+	<div id="title">
+		<h1>What's in your 'fridge?</h1>
+		<h2>Account Information</h2>
+	</div>
+	
 	<div id="showAccount">
 		<?php
-			include("openDB.php");
-			
 			$usrID = $_SESSION['username'];
 			
 			$query = stripSlashes("SELECT firstName, lastName, email FROM User WHERE email='".$usrID."'");
@@ -52,12 +45,8 @@
 		?>
 	</div>
 	
-	<?php
-		include("userMenu.php");
-	?>
+	<?php include("userMenu.php"); ?>
+	
 </div>
 
-<?php include("lowerLinks.php"); ?>
-
-</body>
-</html>
+<?php include("bottom.php"); ?>

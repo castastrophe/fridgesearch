@@ -1,18 +1,20 @@
 <?php
-	session_start();
-	if($_SESSION['login']!="true"){
-		header("Location: index.php");
-	}
+/*
+ * Page: recipeView.php
+ * Desc: Recipe search, view a single recipes
+ * Author: Cas Gentry
+ * Date Updated: 7 Oct 12
+*/
+
+	include("top.php");
+	
+	login_status();
 	
 	if(@$_GET['rating'] != null){
-		// include pages with connection details, DRY approach
-		include("credentials.php");
-		include("dbLogin.php");
-		
 		//Recipe ID should be found in the url
-		$recipeID = $_GET['recipeID'];
-		$rate 	= $_GET['rating'];
-		$userID = $_SESSION['username'];
+		$recipeID 	= trim($_GET['recipeID']);
+		$rate 		= trim($_GET['rating']);
+		$userID 	= trim($_SESSION['username']);
 		
 		$query = "SELECT COUNT(*) FROM Ratings WHERE recipeID='$recipeID' AND userID='$userID'";
 	  	$result= mysql_query($query);
@@ -20,7 +22,7 @@
 	  	$checks = mysql_fetch_row($result);
 	  		 
 	  	// If this recipe has already been rated, replace it
-	   	if($checks[0]==1){
+	   	if($checks){
 	   		$query  = "UPDATE Ratings SET recipeID='$recipeID', numStars='$rate', userID='$userID', recipeID='$recipeID' WHERE recipeID='$recipeID'";
 		   	$result = mysql_query($query);
 	   	}
@@ -33,18 +35,10 @@
 ?>
 
 <html>
-<head>
 
-<!-- 
-   Home Page for CS230
-   Author: Cas Gentry
-   Date:   27 Nov 10
+<?php include("head.html"); ?>
 
-   Filename:         recipeView.php
-   Supporting files: format.css, error.js, rating.php
--->
-<link href="format.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="error.js"> </script>
+<body>
 
 <script type="text/javascript">
 	function mouseOver(num){
@@ -62,9 +56,6 @@
 	}
 </script>
 
-<title>Database Project</title>
-</head>
-<body>
 <div id="main">
 
 	<div id="title">
@@ -74,18 +65,17 @@
 	
 	<div id="displayRecipe">
 		<?php
-			include("credentials.php");
-			include("dbLogin.php");
-			
 			//Recipe ID should be found in the url
-			$recipeID = $_GET['recipeID'];
+			$recipeID = trim($_GET['recipeID']);
 			
 			//Pull recipe data from database
 			$query = "SELECT title, image, userID, summary, serves, cookTime, steps FROM Recipe WHERE recipeID='".$recipeID."'";
 			$result= mysql_query($query);
-			
-			echo "<table padding=\"0px\">";
-			
+		?>
+		
+		<table style="padding: 0px">
+		
+		<?php
 			$row = mysql_fetch_row($result);
 			$author = $row[2];
 			
@@ -149,14 +139,11 @@
 
 			echo "<td></tr>";
 			echo "<tr><td colspan=\"4\" class=\"steps\">".$row[6]."</td></tr>";
-			
-			echo "</table>";
-			echo "<BR><BR><BR>";
-		echo "</div>";
+		?>
+		</table>
+	</div>
 
-		include("userMenu.php");
-	?>
-</div>
+	<?php include("userMenu.php"); ?>
 </div>
 
 <?php include("bottom.php"); ?>

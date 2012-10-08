@@ -1,14 +1,19 @@
 <?php
-	session_start();
-	include("credentials.php");
-	include("dbLogin.php");
+/*
+ * Page: register.php
+ * Desc: Recipe search, view your recipes
+ * Author: Cas Gentry
+ * Date Updated: 7 Oct 12
+*/
+
+	include("top.php");
 	
 	/* After putting in your info, this puts your data into the Registration db */
 	if(@$_GET['register']=="submit"){
-	   	$first 	= $_POST[first];
-	   	$last	= $_POST[last];
-	   	$email	= $_POST[email];
-	   	$thePwd	= $_POST[thePwd];
+	   	$first 	= trim($_POST['first']);
+	   	$last	= trim($_POST['last']);
+	   	$email	= trim($_POST['email']);
+	   	$thePwd	= trim($_POST['thePwd']);
 	
 		/* Find out if that e-mail is already registered */
 	   	$query = stripSlashes("SELECT COUNT(*) FROM User WHERE email='$email' LIMIT 1");
@@ -85,22 +90,12 @@
 	}
 ?>
 <html>
-<head>
-<!-- 
-   Home Page for CS230
-   Author: Cas Gentry
-   Date:   26 Oct 10
 
-   Filename:         register.php
-   Supporting files: format.css
--->
-<link href="format.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="error.js"> </script>
+<?php include("head.html"); ?>
 
-<title>Database Project</title>
-</head>
 <body>
 <div id="main">
+
 	<div id="title">	
 		<h1>What's in your 'fridge?</h1>
 	</div>
@@ -125,7 +120,7 @@
 		elseif(@$_GET['step']=="validate"){
 			if(@$_SESSION['check']=="confirmed"){
 				unset($_SESSION['check']);
-				$_SESSION['login']="yes";
+				$_SESSION['login']="true";
 				echo "<p>Thank you for registering!</p>";
 				echo "<form action=\"index.php\" method=\"POST\"><input type=\"submit\" value=\"Return Home\"/></form>";
 			}

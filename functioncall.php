@@ -1,9 +1,7 @@
 <?php
 
 function login_status(){
-	if($_SESSION['login']!="true"){
-		header("Location: index.php");
-	}
+	if($_SESSION['login']!="true"){ header("Location: index.php"); }
 }
 
 function connect_db(){
