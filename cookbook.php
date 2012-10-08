@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION['login']!="yes"){
+	if($_SESSION['login']!="true"){
 		header("Location: index.php");
 	}
 ?>
@@ -30,6 +30,7 @@
 		<div id="homeLink"><a href="index.php"><img src="fridge.jpg" height="100px"/></a></div>
 		
 	<?php
+		include("credentials.php");
 		include("dbLogin.php");
 		
 		$usrID = $_SESSION['username'];
@@ -40,7 +41,7 @@
 		echo "<div id=\"showRecipe\">";
 		echo "<table width=\"100%\">";
 		
-		if(mysql_num_rows($result) != 0){
+		if($result){
 			for($l=0; $l<mysql_num_rows($result); $l++){
 			$level = mysql_fetch_row($result);
 			for($m=0; $m<mysql_num_fields($result); $m=$m+2){

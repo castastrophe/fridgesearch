@@ -1,11 +1,12 @@
 <?php
 	session_start();
-	if($_SESSION['login']!="yes"){
+	if($_SESSION['login']!="true"){
 		header("Location: index.php");
 	}
 
 	if(@$_GET['upload']=="yes") {
-   		include("openDB.php");
+   		include("credentials.php");
+   		include("dbLogin.php");
 
 		$title 	= $_POST[recipeTitle];
 		$blurb = $_POST[blurb];		
@@ -64,7 +65,7 @@ var fileTypes=["bmp","gif","png","jpg","jpeg"];
   // the id of the preview image tag
 var outImage="previewField";
   // what to display when the image is not valid
-var defaultPic="recipe.jpg";
+var defaultPic="images/recipe.jpg";
 
 function preview(what){
   var source=what.value;
@@ -117,9 +118,10 @@ function applyChanges(){
 		<h1>What's in your 'fridge?</h1>
 		<h2>Add Your Own Recipe*</h2>
 	</div>
-	<div id="homeLink"><a href="index.php"><img src="fridge.jpg" height="100px"/></a></div>
+	<div id="homeLink"><a href="index.php"><img src="images/fridge.jpg" height="100px"/></a></div>
 	<div id="addRecipe">
-		<table id="addRecipeForm" width="100%"><form enctype="multipart/form-data" action="addrecipes.php?upload=yes" method="POST" onsubmit="return submitForm();">
+		<table id="addRecipeForm">
+		<form enctype="multipart/form-data" action="addrecipes.php?upload=yes" method="POST" onsubmit="return submitForm();">
 		<script type="text/javascript">
 		
 			function submitForm() {
@@ -134,32 +136,43 @@ function applyChanges(){
 			//Usage: initRTE(imagesPath, includesPath, cssFile)
 			initRTE("images/", "", "");
 		</script>
-			<tr><td class="leftRecipe" width="10%">Title:</td>
-				<td width="40%"><input type="text" name="recipeTitle" style="width: 100%"/></td>
+		
+		<tr>
+			<td class="leftRecipe" width="10%">Title:</td>
+			<td width="40%"><input type="text" name="recipeTitle" style="width: 100%"/></td>
 			
 				<td rowspan="10" width="50%" align="center"><img id="previewField" src="recipe.jpg" height="250px">
 					<BR><p id="picFont"><span class="special">*</span>All recipes added must be the sole property of the user entering them.  Please do not
 					submit copyrighted recipes as your own.</p>
 				</td>
-			
 			</tr>
 				
-			<tr><td class="leftRecipe">Short Description:</td>
-				<td><textarea name="blurb" rows="7" style="width: 100%"/></textarea></td></tr>
+			<tr>
+				<td class="leftRecipe">Short Description:</td>
+				<td><textarea name="blurb" rows="7" style="width: 100%"/></textarea></td>
+			</tr>
+
+			<tr>
+				<td class="leftRecipe">Image:</td>
+				<td><input type="file" name="picField" onchange="preview(this)" style="width: 100%"></td>
+			</tr>
 			
-			<tr><td class="leftRecipe">Image:</td>
-				<td><input type="file" name="picField" onchange="preview(this)" style="width: 100%"></td></tr>
+			<tr>
+				<td class="leftRecipe">Serves:</td>
+				<td><input type="text" name="serveSize" style="width: 25%"/><span id="measurement">people</span></td>
+			</tr>
 			
-			<tr><td class="leftRecipe">Serves:</td>
-				<td><input type="text" name="serveSize" style="width: 25%"/><span id="measurement">people</span></td></tr>
+			<tr>
+				<td class="leftRecipe">Cook time:</td>
+				<td><input type="text" name="cookTime" style="width: 25%"/><span id="measurement">min</span></td>
+			</tr>
 			
-			<tr><td class="leftRecipe">Cook time:</td>
-				<td><input type="text" name="cookTime" style="width: 25%"/><span id="measurement">min</span></td></tr>
-			
-			<tr><td class="leftRecipe">Ingredients:</td>
+			<tr>
+				<td class="leftRecipe">Ingredients:</td>
 				<td>
 					<?php
-						include("openDB.php");
+						include("credentials.php");
+						include("dbLogin.php");
 						
 						$ingredAmt = 5;
 						
@@ -186,19 +199,24 @@ function applyChanges(){
 						echo "<input type=\"button\" style=\"width: 75px;\" value=\"Add More\" onClick=\"history.go(0)\"/>";
 					?>
 					<BR><BR>
-				</td></tr>
-				
+				</td>
+			</tr>
 			
-			<tr><td class="leftRecipe">Directions:</td>
+			<tr>
+				<td class="leftRecipe">Directions:</td>
 				<td colspan="2">
 				<script type="text/javascript">
 					//Usage: writeRichText(fieldname, html, width, height, buttons, readOnly)
 					writeRichText('cookSteps', '<ol><li></li></ol>', 400, 200, true, false);
 				</script>
-				
 				<!--<textarea name="cookSteps" rows="14" style="width: 140%"/>1. </textarea></td></tr>-->
-			
-			<tr><td colspan="2" align="right"><input type="submit" style="width: 100px"/><BR><BR><BR></td></tr>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<input type="submit" style="width: 100px"/>
+				</td>
+			</tr>
 		</form></table>
 	</div>
 

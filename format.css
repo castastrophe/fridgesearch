@@ -347,12 +347,13 @@ input{
 	color: red;
 }
 
-#addRecipeForm{
+#addRecipe{
 	display: block;
+	overflow: auto;
 	position: absolute;
 	top: 25%;
 	left: 5%;
-	height: 65%;
+	height: 60%;
 	width: 90%;
 }
 
