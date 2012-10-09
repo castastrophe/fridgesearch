@@ -507,3 +507,17 @@ input{
 #homeLink a{
 	text-decoration: none;
 }
+
+#content .search{
+	padding-bottom: 20px;
+}
+
+.searchcolor{
+	color: red;
+	font-weight: bold;
+}
+
+#content .entry{
+	font-size: 11pt;
+	font-style: italic;
+}

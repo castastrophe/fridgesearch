@@ -1,5 +1,8 @@
 <?php
-	if ( @$_SESSION['login'] != "true" ){
+	if ($_SESSION['login'] == "true"){
+		include("userMenu.php");
+	}
+	else{
 		echo "<div id=\"login\">";
 		echo "<form action=\"index.php?dologin=true\" method=\"POST\">";
 		echo "<table><tr>";
@@ -21,8 +24,5 @@
 		echo "</tr><tr><td><input type=\"submit\" class=\"logButton\" value=\"Login\"/></td></tr>";
 		echo "</table></form>";
 		echo "</div>";
-	}
-	else{
-		include("userMenu.php");
 	}
 ?>

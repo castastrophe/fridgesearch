@@ -12,7 +12,7 @@
 	if(@$_GET['register']=="submit"){
 	   	$first 	= trim($_POST['first']);
 	   	$last	= trim($_POST['last']);
-	   	$email	= trim($_POST['email']);
+	   	$email	= $_POST['email'];
 	   	$thePwd	= trim($_POST['thePwd']);
 	
 		/* Find out if that e-mail is already registered */
@@ -45,8 +45,16 @@
 	   			unset($_SESSION['check']);
 	   			/* E-mail the confirmation to the customer */
 	  		 	$subject = "What's in Your Fridge - Confirmation E-mail";
- 				$body = "Go to casgentry.com/register.php?step=validate&email=".$email." to confirm your membership with What's in Your Fridge.";
- 				if (mail($email, $subject, $body)) {
+	  		 	
+	  		 	$headers = "MIME-Version: 1.0\r\n";
+	  		 	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+	  		 	
+ 				$body = "<html><body>";
+ 				$body .= 'Follow <a href="casgentry.com/recipe/register.php?step=validate&email='.$email.'">casgentry.com/recipe/register.php?step=validate&email='.$email.'</a>';
+ 				$body .= " to confirm your membership with What's in Your Fridge.";
+ 				$body .= "</body></html>";
+ 				
+ 				if (mail($email, $subject, $body, $headers)) {
    					header("Location: register.php?step=confirm");
   				} 
   				else {
@@ -60,7 +68,6 @@
   	/* Check that the entered info matches the Registration db */
   	if(@$_GET['step']=="validate" && @$_GET['checkPwd']=="do"){
 		/* Using the e-mail entered, pull the pwd, fn, and ln from the db */
-  	 	include("dbLogin.php");
   	 	unset($_SESSION['check']);
   	 	unset($_SESSION['error']);
   	 	
@@ -72,17 +79,24 @@
   		
   		$row=mysql_fetch_row($result);
   		
-  		echo $row[0];
+  		//echo $row[0];
+  		
   		/* If the password entered matches the password from the db, enter it into the User db */
   		if($usrPwd == $row[0]){
   			$_SESSION['check']="confirmed";
-			$query="INSERT INTO User VALUES(\"$email\",\"$row[0]\",\"$row[1]\",\"$row[2]\", 1)";
+  			
+  			mysql_query("SELECT MAX(userID) FROM User");
+  			$id = mysql_insert_id();
+  			
+			$query="INSERT INTO User VALUES(\"$email\",\"$row[0]\",\"$row[1]\",\"$row[2]\", CURDATE(), \"$id\")";
 			$result=mysql_query($query);
 	
-			/* Delete the information from the Register db */
-			$query="DELETE FROM Register WHERE email='$email'";
-			$result=mysql_query($query);
-		}
+			if($result){
+				/* Delete the information from the Register db */
+				$query="DELETE FROM Register WHERE email='$email'";
+				$result2=mysql_query($query);
+			}
+  		}
 		/* Provide an error message if the password doesn't match */
 		else{
 			$_SESSION['error']="mismatchPassword";

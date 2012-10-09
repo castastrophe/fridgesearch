@@ -1,10 +1,7 @@
-<?php	
-	include("credentials.php");
-	include("dbLogin.php");
-	
+<?php
 	$getName = $_SESSION['username'];
 		
-	$query = stripSlashes("SELECT firstname,lastname FROM User WHERE email='$getName'");
+	$query = stripSlashes("SELECT firstname, lastname FROM User WHERE email='$getName'");
 	$result=mysql_fetch_row(mysql_query($query));
 	
 	echo "<div id=\"welcome\">";

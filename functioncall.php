@@ -81,6 +81,8 @@ function ratings($recID, $user){
 			echo "\" name=\"star".$s."\" id=\"rate\"/></a> ";
 		}
 	}
+	
+	return;
 }
 
 ?>

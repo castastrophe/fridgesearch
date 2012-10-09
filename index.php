@@ -9,7 +9,9 @@
 	include("top.php");
 	
 	// start a new session
-	session_start();
+	if (!isset($_SESSION)) {
+		session_start();
+	}
 ?>
 
 <html>
@@ -18,9 +20,7 @@
 
 <body>
 <div id="main">
-	<?php
-		include("loginmenu.php");
-	?>
+	<?php include("loginmenu.php"); ?>
 
 	<div id="title">
 		<h1>What's in your 'fridge?</h1>
@@ -29,11 +29,10 @@
 	<div id="content">
 		<div id="fridge">
 			<div id="searchForm">
-			<!-- <form style="margin-left: 25px" action="searchResults.php" method="POST"> -->
-			<form style="margin-left: 25px" action="" method="POST">
+			<form style="margin-left: 25px" action="searchResults.php" method="POST">
 				<p>What ingredients would you like to cook with?</p>
 				<?php
-					for($a=0; $a<5; $a++){
+					for($a=0; $a<6; $a++){
 						echo "<input type=\"text\" name=\"ingreds[]\" class=\"ingred\"/>";
 					}
 				?>
